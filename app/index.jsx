@@ -7,10 +7,10 @@ const Welcome = () => {
     <View className="flex-1 items-center justify-center bg-white">
       <Text className='text-3xl font-pblack'>Welcome</Text>
       <Link
-        href='/profile'
+        href='/home'
         style={{ color: 'blue' }}
       >
-        Go to Profile
+        Go to Home
       </Link>
     </View>
   )
