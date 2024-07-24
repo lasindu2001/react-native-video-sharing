@@ -1,7 +1,8 @@
-import { Image, ScrollView, StatusBar, Text, View } from 'react-native'
+import { Image, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { images } from "../constants";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 
 const Welcome = () => {
   return (
@@ -35,6 +36,15 @@ const Welcome = () => {
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
             Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora
           </Text>
+          <TouchableOpacity
+            onPress={() => router.push("/sign-in")}
+            activeOpacity={0.7}
+            className={`bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center w-full mt-7`}
+          >
+            <Text className='text-primary font-psemibold text-lg'>
+              Continue with Email
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />
