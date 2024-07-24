@@ -1,8 +1,9 @@
-import { Image, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { images } from "../constants";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
 const Welcome = () => {
   return (
@@ -10,7 +11,7 @@ const Welcome = () => {
       <ScrollView contentContainerStyle={{
         height: "100%",
       }}>
-        <View className="w-full flex justify-center items-center h-full px-4">
+        <View className="w-full flex justify-center items-center min-h-[85vh] px-4">
           <Image
             source={images.logo}
             className="w-[130px] h-[84px]"
