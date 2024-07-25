@@ -15,9 +15,9 @@ const Home = () => {
     <SafeAreaView className="bg-primary">
       <FlatList
         data={[
-          { id: '1' },
-          { id: '2' },
-          { id: '3' },
+          // { id: '1' },
+          // { id: '2' },
+          // { id: '3' },
         ]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
@@ -56,7 +56,10 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState />
+          <EmptyState 
+            title="No Videos Found"
+            subtitle="No videos created yet"
+          />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
