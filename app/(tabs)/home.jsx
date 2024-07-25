@@ -42,17 +42,21 @@ const Home = () => {
                 />
               </View>
             </View>
-            <SearchInput/>
+            <SearchInput />
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-lg font-pregular text-gray-100 mb-3">
                 Latest Videos
               </Text>
-              <Trending/>
+              <Trending posts={[
+                { id: '1' },
+                { id: '2' },
+                { id: '3' },
+              ] ?? []} />
             </View>
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState/>
+          <EmptyState />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
