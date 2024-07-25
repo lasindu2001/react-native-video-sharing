@@ -2,6 +2,7 @@ import { FlatList, Text } from 'react-native'
 import React from 'react'
 
 const Trending = ({ posts }) => {
+  console.log(posts);
   return (
     <FlatList
       data={posts}
