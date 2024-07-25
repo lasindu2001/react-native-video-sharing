@@ -1,23 +1,47 @@
-import { View, Text, FlatList, Image, RefreshControl } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, FlatList, Image, RefreshControl, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from "../../constants";
 import SearchInput from '../../components/SearchInput';
 import Trending from '../../components/Trending';
 import EmptyState from '../../components/EmptyState';
+import { getAllPosts } from '../../lib/appwrite'
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false)
 
-  const onRefresh = async () => { }
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await getAllPosts()
+        setData(res);
+      } catch (error) {
+        Alert.alert("Error", error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData()
+  }, [])
+
+  console.log(data);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // refetch videos
+    setRefreshing(false);
+  }
 
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={[
-          // { id: '1' },
-          // { id: '2' },
-          // { id: '3' },
+          { id: '1' },
+          { id: '2' },
+          { id: '3' },
         ]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
