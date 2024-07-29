@@ -6,6 +6,9 @@ import { ResizeMode, Video } from 'expo-av'
 import { icons } from '../../constants'
 import CustomButton from '../../components/CustomButton'
 import * as DocumentPicker from 'expo-document-picker';
+import { router } from 'expo-router'
+import { createVideoPost } from '../../lib/appwrite'
+import { useGlobalContext } from '../../contexts/GlobalProvider'
 
 const Create = () => {
   const [uploading, setUploading] = useState(false);
@@ -15,6 +18,8 @@ const Create = () => {
     thumbnail: null,
     prompt: "",
   });
+
+  const { user } = useGlobalContext()
 
   const openPicker = async (selectType) => {
     const result = await DocumentPicker.getDocumentAsync({
@@ -43,7 +48,35 @@ const Create = () => {
     }
   }
 
-  const submit = () => { }
+  const submit = async () => {
+    if (
+      (form.prompt === "") |
+      (form.title === "") |
+      !form.thumbnail |
+      !form.video
+    ) {
+      return Alert.alert("Please provide all fields");
+    }
+    setUploading(true);
+    try {
+      await createVideoPost({
+        ...form,
+        userId: user.$id,
+      });
+      Alert.alert("Success", "Post uploaded successfully");
+      router.push("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setForm({
+        title: "",
+        video: null,
+        thumbnail: null,
+        prompt: "",
+      });
+      setUploading(false);
+    }
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full">
